@@ -1,31 +1,36 @@
 package model;
 
-import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import javax.persistence.CascadeType;
-
+@Entity
+@Table(name="customers")
 public class Customer {
+	@Id
+	@GeneratedValue
+	@Column(name="GROUPID")
 	private int custGroupID;
+	@Column(name="GROUPSIZE")
 	private int groupSize;
-	private LocalDate visitDate;
-	@ManyToOne (cascade=CascadeType.PERSIST)
-	private Employee employee;
+	@Column(name="GROUPNAME")
+	private String groupName;
 	
-	
-	
-	public Customer(int custGroupID, int groupSize, LocalDate visitDate, Employee employee) {
+	public Customer() {
 		super();
-		this.custGroupID = custGroupID;
-		this.groupSize = groupSize;
-		this.visitDate = visitDate;
-		this.employee = employee;
 	}
-	public Customer(int custGroupID, int groupSize, LocalDate visitDate, Employee employee) {
+	public Customer(int custGroupID, int groupSize) {
 		super();
 		this.custGroupID = custGroupID;
 		this.groupSize = groupSize;
-		this.visitDate = visitDate;
-		this.employee = employee;
+	}
+	public Customer(int custGroupID, int groupSize, String groupName) {
+		super();
+		this.custGroupID = custGroupID;
+		this.groupSize = groupSize;
+		this.groupName = groupName;
 	}
 	
 	
@@ -41,28 +46,13 @@ public class Customer {
 	public void setGroupSize(int groupSize) {
 		this.groupSize = groupSize;
 	}
-	public LocalDate getVisitDate() {
-		return visitDate;
-	}
-	public void setVisitDate(LocalDate visitDate) {
-		this.visitDate = visitDate;
-	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
 	
 	@Override
 	public String toString() {
-		return "Customer [custGroupID=" + custGroupID + ", groupSize=" + groupSize + ", visitDate=" + visitDate
-				+ ", allAccessPass=" + "]";
+		return "Customer [custGroupID=" + custGroupID + ", groupSize=" + groupSize + ", groupName=" + groupName + "]";
 	}
-	
 	public String returnCustomerDetails() {
-		return this.custGroupID + ": " + this.groupSize + ": " + this.visitDate;
+		return this.custGroupID + ": " + this.groupSize + ": " + this.groupName;
 	}
 	
 }
